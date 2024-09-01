@@ -1,56 +1,291 @@
-import React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "./ui/button";
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "./ui/form";
+import { Input } from "./ui/input";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "./ui/select";
+import { Popover, PopoverTrigger } from "./ui/popover";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
+import { PopoverContent } from "@radix-ui/react-popover";
+import { Calendar } from "./ui/calendar";
+import { format } from "date-fns";
+import { formSchema } from "@/utils/zodSchema";
+import { departments, states } from "@/data/formData";
 
-export default function Form() {
+interface ProfileFormProps {
+	onSubmit: (data: z.infer<typeof formSchema>) => void;
+}
+
+export function ProfileForm({ onSubmit }: ProfileFormProps) {
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
+		defaultValues: {
+			firstName: "",
+			lastName: "",
+			dateOfBirth: new Date(),
+			startDate: new Date(),
+			street: "",
+			city: "",
+			state: "",
+			zipCode: undefined,
+			department: "",
+		},
+	});
+
 	return (
-		<form
-			action="#"
-			id="create-employee"
-			className="flex flex-col w-full max-w-[550px] p-4 bg-red-200"
-		>
-			<label htmlFor="first-name">First Name</label>
-			<input type="text" id="first-name" />
-
-			<label htmlFor="last-name">Last Name</label>
-			<input type="text" id="last-name" />
-
-			<label htmlFor="date-of-birth">Date of Birth</label>
-			<input id="date-of-birth" type="text" />
-
-			<label htmlFor="start-date">Start Date</label>
-			<input id="start-date" type="text" />
-
-			<fieldset className="flex flex-col border p-4">
-				<legend className="p-2">Address</legend>
-
-				<label htmlFor="street">Street</label>
-				<input id="street" type="text" />
-
-				<label htmlFor="city">City</label>
-				<input id="city" type="text" />
-
-				<label htmlFor="state">State</label>
-				<select name="state" id="state">
-					<option>France</option>
-					<option>USA</option>
-					<option>Allemagne</option>
-					<option>UK</option>
-					<option>Italie</option>
-					<option>Japon</option>
-				</select>
-
-				<label htmlFor="zip-code">Zip Code</label>
-				<input id="zip-code" type="number" />
-			</fieldset>
-			<label htmlFor="department">Department</label>
-			<select name="department" id="department">
-				<option>Sales</option>
-				<option>Marketing</option>
-				<option>Engineering</option>
-				<option>Human Resources</option>
-				<option>Legal</option>
-			</select>
-			<Button type="submit">Create Employee</Button>
-		</form>
+		<Form {...form}>
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="w-full max-w-[800px] grid grid-cols-2 items-start justify-start gap-4"
+			>
+				<fieldset className="col-span-2 md:col-span-1">
+					<FormField
+						control={form.control}
+						name="firstName"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>First Name</FormLabel>
+								<FormControl>
+									<Input placeholder="Elon" {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="lastName"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Last Name</FormLabel>
+								<FormControl>
+									<Input placeholder="Musk" {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="dateOfBirth"
+						render={({ field }) => (
+							<FormItem className="flex flex-col gap-1 my-2">
+								<FormLabel>Date of birth</FormLabel>
+								<Popover>
+									<PopoverTrigger asChild>
+										<FormControl>
+											<Button
+												variant={"outline"}
+												className={cn(
+													!field.value &&
+														"text-muted-foreground"
+												)}
+											>
+												{field.value ? (
+													format(field.value, "PPP")
+												) : (
+													<span>Pick a date</span>
+												)}
+												<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+											</Button>
+										</FormControl>
+									</PopoverTrigger>
+									<PopoverContent
+										className="w-fit bg-white shadow-2xl p-0"
+										align="start"
+									>
+										<Calendar
+											mode="single"
+											selected={field.value}
+											onSelect={field.onChange}
+											disabled={(date) =>
+												date > new Date() ||
+												date < new Date("1900-01-01")
+											}
+											initialFocus
+										/>
+									</PopoverContent>
+								</Popover>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="startDate"
+						render={({ field }) => (
+							<FormItem className="flex flex-col gap-1 my-2">
+								<FormLabel>Start Date</FormLabel>
+								<Popover>
+									<PopoverTrigger asChild>
+										<FormControl>
+											<Button
+												variant={"outline"}
+												className={cn(
+													!field.value &&
+														"text-muted-foreground"
+												)}
+											>
+												{field.value ? (
+													format(field.value, "PPP")
+												) : (
+													<span>Pick a date</span>
+												)}
+												<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+											</Button>
+										</FormControl>
+									</PopoverTrigger>
+									<PopoverContent
+										className="w-fit bg-white shadow-2xl p-0"
+										align="start"
+									>
+										<Calendar
+											mode="single"
+											selected={field.value}
+											onSelect={field.onChange}
+											disabled={(date) =>
+												date > new Date() ||
+												date < new Date("1900-01-01")
+											}
+											initialFocus
+										/>
+									</PopoverContent>
+								</Popover>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				</fieldset>
+				<fieldset className="col-span-2 md:col-span-1">
+					<FormField
+						control={form.control}
+						name="street"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Street</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="1234 Main St"
+										{...field}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="city"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>City</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="Los Angeles"
+										{...field}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="state"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>State</FormLabel>
+								<FormControl>
+									<Select
+										value={field.value}
+										onValueChange={(value) =>
+											field.onChange(value)
+										}
+									>
+										<SelectTrigger>
+											<SelectValue placeholder="Select a state" />
+										</SelectTrigger>
+										<SelectContent>
+											{states.map((state) => (
+												<SelectItem
+													key={state.abbreviation}
+													value={state.abbreviation}
+												>
+													{state.name}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="zipCode"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Zip Code</FormLabel>
+								<FormControl>
+									<Input placeholder="90001" {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="department"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Department</FormLabel>
+								<FormControl>
+									<Select
+										value={field.value}
+										onValueChange={(value) =>
+											field.onChange(value)
+										}
+									>
+										<SelectTrigger>
+											<SelectValue placeholder="Select a department" />
+										</SelectTrigger>
+										<SelectContent>
+											{departments.map((department) => (
+												<SelectItem
+													key={department.abbreviation}
+													value={department.name}
+												>
+													{department.name}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				</fieldset>
+				<Button type="submit" className="col-span-2">
+					Save
+				</Button>
+			</form>
+		</Form>
 	);
 }
