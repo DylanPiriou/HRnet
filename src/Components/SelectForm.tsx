@@ -1,6 +1,6 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
-export default function SelectForm({ handleSelectChange}) {
+export default function SelectForm({ handleSelectChange }: { handleSelectChange: (value: string) => void }) {
   return (
 		<div className="flex items-center gap-2">
 			Show
