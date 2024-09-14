@@ -34,22 +34,25 @@ export default function Employees() {
 	}, [])
 
 	return (
-		<main className="w-full flex flex-col items-center justify-center gap-10 p-4">
-			<header className="w-full flex flex-col items-center justify-center gap-8">
+		<main className="w-full min-h-[100vh] h-full flex flex-col items-center gap-10 p-4">
+			<header className="w-full flex flex-col items-center justify-center gap-6 py-10">
 				<div className="w-full flex items-center">
 					<ChevronLeft className="w-5 h-3" />
 					<Link to="/">Home</Link>
 				</div>
-				<h1 className="text-4xl font-extrabold lg:text-5xl">
+				<h1 className="text-4xl font-extrabold lg:text-5xl text-center">
 					Current Employees
 				</h1>
 				{!isLoaded && (
 					<div className="flex flex-col gap-y-2">
-						Load fake data (+ save in LS)<Button onClick={() => LoadData()}>Load fake data</Button>
+						Load fake data (+ save in LS)
+						<Button onClick={() => LoadData()}>
+							Load fake data
+						</Button>
 					</div>
 				)}
 			</header>
-			<section className="w-full flex flex-col items-center justify-center gap-4">
+			<section className="w-full flex-1 flex flex-col items-center justify-start gap-4">
 				<Tab />
 			</section>
 		</main>

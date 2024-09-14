@@ -40,28 +40,30 @@ export default function Home() {
 	}
 
 	return (
-		<main className="w-full h-[100dvh] flex flex-col items-center justify-center gap-10 p-4">
-			<header className="flex flex-col items-center justify-center">
+		<main className="w-full min-h-[100vh] h-full flex flex-col items-center gap-10 p-4">
+			<header className="w-full flex flex-col items-center justify-center py-10">
 				<h1 className="text-4xl font-extrabold lg:text-5xl">HRnet</h1>
 				<Link to="/employees">View Current Employees</Link>
 			</header>
-			<section className="w-full flex flex-col items-center justify-center gap-4">
-				<h2 className="pb-2 text-3xl font-semibold">Create Employee</h2>
+			<section className="w-full flex-1 flex flex-col items-center justify-start gap-4">
+				<h2 className="pb-2 text-2xl lg:text-3xl font-semibold">
+					Create Employee
+				</h2>
 				<ProfileForm onSubmit={onSubmit} />
 				{showLightbox && (
 					<Lightbox>
-						<h2 className="pb-2 text-3xl font-semibold">
+						<h2 className="pb-2 text-2xl lg:text-3xl font-semibold">
 							Employee created !
 						</h2>
 						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Quo placeat omnis officia eos temporibus eum aspernatur
-							soluta, quaerat, quia sit dolore quod nostrum.
-							Perspiciatis voluptas quaerat voluptatem, totam
-							accusamus cumque facilis vel nemo veniam est sapiente
-							perferendis porro fugit expedita amet facere tenetur
-							quia doloribus ad? Deleniti voluptatem alias
-							consequuntur!
+							Lorem ipsum dolor sit amet consectetur adipisicing
+							elit. Quo placeat omnis officia eos temporibus eum
+							aspernatur soluta, quaerat, quia sit dolore quod
+							nostrum. Perspiciatis voluptas quaerat voluptatem,
+							totam accusamus cumque facilis vel nemo veniam est
+							sapiente perferendis porro fugit expedita amet
+							facere tenetur quia doloribus ad? Deleniti
+							voluptatem alias consequuntur!
 						</p>
 					</Lightbox>
 				)}

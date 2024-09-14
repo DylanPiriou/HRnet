@@ -20,7 +20,7 @@ export const formSchema = z.object({
 		message: "City must be at least 2 characters.",
 	}),
 	state: z.string().min(1, {
-		message: "State must be selected.",
+		message: "A state must be selected.",
 	}),
 	zipCode: z.coerce
 		.number({
@@ -33,6 +33,6 @@ export const formSchema = z.object({
 			message: "Zip code must be at least 1 digit.",
 		}),
 	department: z.string().min(1, {
-		message: "Department must be selected.",
+		message: "A department must be selected.",
 	}),
 });
