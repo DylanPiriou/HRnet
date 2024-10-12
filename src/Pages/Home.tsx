@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { z } from "zod";
 import { format } from "date-fns";
 import { generateUniqueId } from "@/utils/generateUniqueId";
-import { Lightbox } from 'minimalist-react-lightbox';
+import { Lightbox } from "@dylanpiriou/simple-lightbox"
 
 export default function Home() {
 
