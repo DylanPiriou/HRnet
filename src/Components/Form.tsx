@@ -61,7 +61,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 							<FormItem>
 								<FormLabel>First Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Elon" {...field} />
+									<Input placeholder="Elon" aria-label="first name" {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -74,7 +74,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 							<FormItem>
 								<FormLabel>Last Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Musk" {...field} />
+									<Input placeholder="Musk" aria-label="last name" {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -90,7 +90,9 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 									<PopoverTrigger asChild>
 										<FormControl>
 											<Button
+											name="date of birth"
 												variant={"outline"}
+												aria-label="date of birth"
 												className={cn(
 													!field.value &&
 														"text-muted-foreground"
@@ -135,6 +137,8 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 									<PopoverTrigger asChild>
 										<FormControl>
 											<Button
+											name="start date"
+											aria-label="start date"
 												variant={"outline"}
 												className={cn(
 													!field.value &&
@@ -180,6 +184,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 								<FormLabel>Street</FormLabel>
 								<FormControl>
 									<Input
+									aria-label="street"
 										placeholder="1234 Main St"
 										{...field}
 									/>
@@ -196,6 +201,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 								<FormLabel>City</FormLabel>
 								<FormControl>
 									<Input
+									aria-label="city"
 										placeholder="Los Angeles"
 										{...field}
 									/>
@@ -212,6 +218,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 								<FormLabel>State</FormLabel>
 								<FormControl>
 									<Select
+									aria-label="state"
 										value={field.value}
 										onValueChange={(value) =>
 											field.onChange(value)
@@ -243,7 +250,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 							<FormItem>
 								<FormLabel>Zip Code</FormLabel>
 								<FormControl>
-									<Input placeholder="90001" {...field} />
+									<Input aria-label="zip code" placeholder="90001" {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -257,6 +264,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 								<FormLabel>Department</FormLabel>
 								<FormControl>
 									<Select
+									aria-label="department"
 										value={field.value}
 										onValueChange={(value) =>
 											field.onChange(value)
@@ -282,7 +290,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 						)}
 					/>
 				</fieldset>
-				<Button type="submit" className="col-span-2">
+				<Button aria-label="save" type="submit" name="save" className="col-span-2">
 					Save
 				</Button>
 			</form>
