@@ -11,8 +11,9 @@ export default function Home() {
 
 	const [showLightbox, setShowLightbox] = useState(false);
 	
+	// Function to handle the form submission
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		// Formater les dates au format américain
+		// Format the date values to US format
 		const formattedValues = {
 			...values,
 			dateOfBirth: values.dateOfBirth
@@ -23,18 +24,18 @@ export default function Home() {
 				: undefined,
 		};
 
-		// Ajouter un identifiant unique aux données du formulaire
+		// Add a unique ID to the user data
 		const userData = { ...formattedValues, id: generateUniqueId() };
 
-		// Récupérer les données existantes du localStorage
+		// Get the existing data from localStorage
 		const existingData = JSON.parse(
 			localStorage.getItem("employees") || "[]"
 		);
 
-		// Ajouter les nouvelles données au tableau existant
+		// Merge the existing data with the new data
 		const updatedData = [...existingData, userData];
 
-		// Enregistrer le tableau mis à jour dans le localStorage
+		// Save the updated data in localStorage
 		localStorage.setItem("employees", JSON.stringify(updatedData));
 		setShowLightbox(true);
 	}

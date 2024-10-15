@@ -35,17 +35,19 @@ export function Tab() {
 	const [totalEntries, setTotalEntries] = React.useState(10);
 	const [pageIndex, setPageIndex] = React.useState(0);
 
-	// Récupérer les données du localStorage
+	// Load the data from localStorage
 	const [data, setData] = React.useState([]);
 	React.useEffect(() => {
 		setData(JSON.parse(localStorage.getItem("employees") || "[]"));
 	}, []);
 
+	// Function to handle the select change
 	const handleSelectChange = (value: string) => {
 		setTotalEntries(parseInt(value, 10));
 		setPageIndex(0);
 	};
 
+	// Create the table instance
 	const table = useReactTable({
 		data,
 		columns,
@@ -70,10 +72,12 @@ export function Tab() {
 		},
 	});
 
+	// Function to handle the next page
 	const handleNext = () => {
 		setPageIndex((prev) => Math.min(prev + 1, table.getPageCount() - 1));
 	};
 
+	// Function to handle the previous page
 	const handlePrevious = () => {
 		setPageIndex((prev) => Math.max(prev - 1, 0));
 	};

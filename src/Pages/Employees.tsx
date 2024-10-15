@@ -7,22 +7,24 @@ import { Link } from "react-router-dom";
 
 export default function Employees() {
 
+	// Function to load data in localStorage
 	const LoadData = () => {
-		// Récupérer les données existantes du localStorage
+		// Verify if data is already in localStorage
 		const existingData = JSON.parse(
 			localStorage.getItem("employees") || "[]"
 		);
 
-		// Fusionner les nouvelles données avec les données existantes
+        // Merge the existing data with the new data
 		const updatedData = [...existingData, ...data];
 
-		// Mettre à jour le localStorage avec les données fusionnées
+		// Update the localStorage
 		localStorage.setItem("employees", JSON.stringify(updatedData));
 
-		// Recharger la page
+		// Reload the page
 		window.location.reload();
 	};
 
+	// Check if the data is already loaded
 	const [isLoaded, setIsLoaded] = useState(true);
 	useEffect(() => {
 		const existingData = localStorage.getItem("employees");

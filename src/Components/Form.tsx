@@ -32,6 +32,7 @@ interface ProfileFormProps {
 }
 
 export function ProfileForm({ onSubmit }: ProfileFormProps) {
+	// Create the form instance
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
