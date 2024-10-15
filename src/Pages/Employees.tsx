@@ -48,7 +48,7 @@ export default function Employees() {
 				{!isLoaded && (
 					<div className="flex flex-col gap-y-2">
 						Load fake data (+ save in LS)
-						<Button onClick={() => LoadData()}>
+						<Button aria-label="load fake data" onClick={() => LoadData()}>
 							Load fake data
 						</Button>
 					</div>

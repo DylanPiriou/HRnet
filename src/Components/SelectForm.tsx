@@ -5,7 +5,7 @@ export default function SelectForm({ handleSelectChange }: { handleSelectChange:
 		<div className="flex items-center gap-2">
 			Show
 			<Select onValueChange={handleSelectChange}>
-				<SelectTrigger>
+				<SelectTrigger aria-label="Select number of entries">
 					<SelectValue placeholder="10" />
 				</SelectTrigger>
 				<SelectContent>

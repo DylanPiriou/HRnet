@@ -62,7 +62,11 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 							<FormItem>
 								<FormLabel>First Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Elon" aria-label="first name" {...field} />
+									<Input
+										placeholder="Elon"
+										aria-label="first name"
+										{...field}
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -75,7 +79,11 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 							<FormItem>
 								<FormLabel>Last Name</FormLabel>
 								<FormControl>
-									<Input placeholder="Musk" aria-label="last name" {...field} />
+									<Input
+										placeholder="Musk"
+										aria-label="last name"
+										{...field}
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -91,7 +99,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 									<PopoverTrigger asChild>
 										<FormControl>
 											<Button
-											name="date of birth"
+												name="date of birth"
 												variant={"outline"}
 												aria-label="date of birth"
 												className={cn(
@@ -138,8 +146,8 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 									<PopoverTrigger asChild>
 										<FormControl>
 											<Button
-											name="start date"
-											aria-label="start date"
+												name="start date"
+												aria-label="start date"
 												variant={"outline"}
 												className={cn(
 													!field.value &&
@@ -185,7 +193,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 								<FormLabel>Street</FormLabel>
 								<FormControl>
 									<Input
-									aria-label="street"
+										aria-label="street"
 										placeholder="1234 Main St"
 										{...field}
 									/>
@@ -202,7 +210,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 								<FormLabel>City</FormLabel>
 								<FormControl>
 									<Input
-									aria-label="city"
+										aria-label="city"
 										placeholder="Los Angeles"
 										{...field}
 									/>
@@ -219,13 +227,13 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 								<FormLabel>State</FormLabel>
 								<FormControl>
 									<Select
-									aria-label="state"
+										aria-label="state"
 										value={field.value}
 										onValueChange={(value) =>
 											field.onChange(value)
 										}
 									>
-										<SelectTrigger>
+										<SelectTrigger aria-label="select a state">
 											<SelectValue placeholder="Select a state" />
 										</SelectTrigger>
 										<SelectContent>
@@ -251,7 +259,11 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 							<FormItem>
 								<FormLabel>Zip Code</FormLabel>
 								<FormControl>
-									<Input aria-label="zip code" placeholder="90001" {...field} />
+									<Input
+										aria-label="zip code"
+										placeholder="90001"
+										{...field}
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -265,19 +277,21 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 								<FormLabel>Department</FormLabel>
 								<FormControl>
 									<Select
-									aria-label="department"
+										aria-label="department"
 										value={field.value}
 										onValueChange={(value) =>
 											field.onChange(value)
 										}
 									>
-										<SelectTrigger>
+										<SelectTrigger aria-label="select a department">
 											<SelectValue placeholder="Select a department" />
 										</SelectTrigger>
 										<SelectContent>
 											{departments.map((department) => (
 												<SelectItem
-													key={department.abbreviation}
+													key={
+														department.abbreviation
+													}
 													value={department.name}
 												>
 													{department.name}
@@ -291,7 +305,12 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 						)}
 					/>
 				</fieldset>
-				<Button aria-label="save" type="submit" name="save" className="col-span-2">
+				<Button
+					aria-label="save"
+					type="submit"
+					name="save"
+					className="col-span-2"
+				>
 					Save
 				</Button>
 			</form>
