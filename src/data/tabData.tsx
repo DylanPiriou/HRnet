@@ -1,22 +1,9 @@
 import { Button } from "@/Components/ui/button";
+import { Employee } from "@/utils/type";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export type Payment = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	startDate: string;
-	department: string;
-	dateOfBirth: string;
-	street: string;
-	city: string;
-	state: string;
-	zipCode: number;
-};
-
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Employee>[] = [
 	{
 		accessorKey: "firstName",
 		header: ({ column }) => {
@@ -190,7 +177,7 @@ export const columns: ColumnDef<Payment>[] = [
 	},
 ];
 
-export const data: Payment[] = [
+export const data: Employee[] = [
 	{
 		id: "1",
 		firstName: "John",

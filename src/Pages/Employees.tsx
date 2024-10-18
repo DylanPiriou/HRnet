@@ -1,39 +1,25 @@
 import { Tab } from "@/Components/Tab";
 import { Button } from "@/Components/ui/button";
+import { AppContext } from "@/context";
 import { data } from "@/data/tabData";
+import { AppContextType } from "@/utils/type";
 import { ChevronLeft } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Employees() {
 
-	// Function to load data in localStorage
+	const { state, addEmployee } = useContext(AppContext) as AppContextType;
+
+	// Function to load data in global state
+	const [isLoaded, setIsLoaded] = useState(false);
 	const LoadData = () => {
-		// Verify if data is already in localStorage
-		const existingData = JSON.parse(
-			localStorage.getItem("employees") || "[]"
-		);
-
-        // Merge the existing data with the new data
-		const updatedData = [...existingData, ...data];
-
-		// Update the localStorage
-		localStorage.setItem("employees", JSON.stringify(updatedData));
-
-		// Reload the page
-		window.location.reload();
+		// Add the user data to the global state
+		data.forEach((employee) => {
+			addEmployee(employee);
+		});
+		setIsLoaded(true);
 	};
-
-	// Check if the data is already loaded
-	const [isLoaded, setIsLoaded] = useState(true);
-	useEffect(() => {
-		const existingData = localStorage.getItem("employees");
-		if (existingData && JSON.parse(existingData).length > 10) {
-			setIsLoaded(true);
-		} else {
-			setIsLoaded(false);
-		}
-	}, [])
 
 	return (
 		<main className="w-full min-h-[100vh] h-full flex flex-col items-center gap-10 p-4">
@@ -45,10 +31,13 @@ export default function Employees() {
 				<h1 className="text-4xl font-extrabold lg:text-5xl text-center">
 					Current Employees
 				</h1>
-				{!isLoaded && (
-					<div className="flex flex-col gap-y-2">
-						Load fake data (+ save in LS)
-						<Button aria-label="load fake data" onClick={() => LoadData()}>
+				{state.employees.length < 10 && !isLoaded && (
+					<div className="flex flex-col justify-center items-center gap-y-2">
+						Load fake data
+						<Button
+							aria-label="load fake data"
+							onClick={() => LoadData()}
+						>
 							Load fake data
 						</Button>
 					</div>

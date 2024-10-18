@@ -22,6 +22,8 @@ import {
 } from "./ui/table";
 import { columns } from "../data/tabData";
 import SelectForm from "./SelectForm";
+import { AppContext } from "@/context";
+import { AppContextType, Employee } from "@/utils/type";
 
 
 export function Tab() {
@@ -34,12 +36,13 @@ export function Tab() {
 	const [globalFilter, setGlobalFilter] = React.useState("");
 	const [totalEntries, setTotalEntries] = React.useState(10);
 	const [pageIndex, setPageIndex] = React.useState(0);
+	const { state } = React.useContext(AppContext) as AppContextType;
 
-	// Load the data from localStorage
-	const [data, setData] = React.useState([]);
+	// Load the data from global state
+	const [data, setData] = React.useState<Employee[]>([]);
 	React.useEffect(() => {
-		setData(JSON.parse(localStorage.getItem("employees") || "[]"));
-	}, []);
+		setData(state.employees);
+	}, [state]);
 
 	// Function to handle the select change
 	const handleSelectChange = (value: string) => {

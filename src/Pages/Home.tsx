@@ -1,14 +1,17 @@
 import { ProfileForm } from "@/Components/Form";
 import { formSchema } from "@/utils/zodSchema";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { format } from "date-fns";
 import { generateUniqueId } from "@/utils/generateUniqueId";
 import { Lightbox } from "@dylanpiriou/simple-lightbox"
+import { AppContext } from "@/context";
+import { AppContextType } from "@/utils/type";
 
 export default function Home() {
 
+	const { addEmployee } = useContext(AppContext) as AppContextType;
 	const [showLightbox, setShowLightbox] = useState(false);
 	
 	// Function to handle the form submission
@@ -27,16 +30,8 @@ export default function Home() {
 		// Add a unique ID to the user data
 		const userData = { ...formattedValues, id: generateUniqueId() };
 
-		// Get the existing data from localStorage
-		const existingData = JSON.parse(
-			localStorage.getItem("employees") || "[]"
-		);
-
-		// Merge the existing data with the new data
-		const updatedData = [...existingData, userData];
-
-		// Save the updated data in localStorage
-		localStorage.setItem("employees", JSON.stringify(updatedData));
+		// Add the user data to the global state
+		addEmployee(userData);
 		setShowLightbox(true);
 	}
 
