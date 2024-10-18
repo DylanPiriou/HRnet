@@ -5,17 +5,20 @@ import { Link } from "react-router-dom";
 import { z } from "zod";
 import { format } from "date-fns";
 import { generateUniqueId } from "@/utils/generateUniqueId";
-import { Lightbox } from "@dylanpiriou/simple-lightbox"
 import { AppContext } from "@/context";
 import { AppContextType } from "@/utils/type";
+import { Lightbox } from '@dylanpiriou/simple-lightbox';
 
 export default function Home() {
 
 	const { addEmployee } = useContext(AppContext) as AppContextType;
 	const [showLightbox, setShowLightbox] = useState(false);
+	const closeLightbox = () => setShowLightbox(false);
+	console.log(showLightbox)
 	
 	// Function to handle the form submission
 	function onSubmit(values: z.infer<typeof formSchema>) {
+		console.log("hey")
 		// Format the date values to US format
 		const formattedValues = {
 			...values,
@@ -32,6 +35,7 @@ export default function Home() {
 
 		// Add the user data to the global state
 		addEmployee(userData);
+		// Show the lightbox
 		setShowLightbox(true);
 	}
 
@@ -46,8 +50,7 @@ export default function Home() {
 					Create Employee
 				</h2>
 				<ProfileForm onSubmit={onSubmit} />
-				{showLightbox && (
-					<Lightbox>
+					<Lightbox show={showLightbox} onClose={closeLightbox}>
 						<h2 className="pb-2 text-2xl lg:text-3xl font-semibold">
 							Employee created !
 						</h2>
@@ -62,7 +65,6 @@ export default function Home() {
 							voluptatem alias consequuntur!
 						</p>
 					</Lightbox>
-				)}
 			</section>
 		</main>
 	);
