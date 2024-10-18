@@ -43,7 +43,7 @@ export function ProfileForm({ onSubmit }: ProfileFormProps) {
 			street: "",
 			city: "",
 			state: "",
-			zipCode: undefined,
+			zipCode: 0,
 			department: "",
 		},
 	});
